@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/Khaspper/inventory-application-express-postgresql#readme",
   "dependencies": {
+    "bcryptjs": "^3.0.2",
     "dotenv": "^17.2.1",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
