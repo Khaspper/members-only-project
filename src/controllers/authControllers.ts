@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 // import { body, validationResult, ValidationChain } from "express-validator";
 import { body, validationResult } from "express-validator";
-import { getUserByUsername, getUserByEmail } from "../db/queries";
+import { getUserByUsername, getUserByEmail, addNewUser } from "../db/queries";
 
 //TODO: Check if the given USER doesn't already exist
 //TODO: Check if the given EMAIL doesn't already exist
@@ -63,6 +63,7 @@ export const postNewUser = [
       console.log(errors);
       return res.sendStatus(400);
     }
+    await addNewUser(req.body);
     res.sendStatus(201);
     // res.sendStatus(400) // Means the req was bad
   },

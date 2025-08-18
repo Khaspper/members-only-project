@@ -1,4 +1,11 @@
 import pool from "./pool";
+import bcrypt from "bcryptjs";
+
+type TUser = {
+  username: string;
+  email: string;
+  password: string;
+};
 
 export async function getUserByUsername(username: string) {
   const { rows } = await pool.query(
@@ -14,4 +21,14 @@ export async function getUserByEmail(email: string) {
     [email]
   );
   return rows;
+}
+
+export async function addNewUser(user: TUser) {
+  const username = user.username;
+  const hash = await bcrypt.hash(user.password, 10);
+  const email = user.email;
+  await pool.query(
+    "INSERT INTO users (username, hash, email) VALUES ($1, $2, $3)",
+    [username, hash, email]
+  );
 }
