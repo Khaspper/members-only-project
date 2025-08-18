@@ -8,17 +8,26 @@
   </head>
   <body class="bg-gray-100 min-h-screen flex items-center justify-center">
     <form
-      action="/homepage"
-      method="GET"
+      action="/"
+      method="POST"
       class="bg-white p-8 rounded-lg shadow-lg max-w-xs w-full flex flex-col gap-2"
     >
-      <h1 class="text-4xl font-bold text-gray-800 mb-4 text-center">Login</h1>
+      <h1 class="text-4xl font-bold text-gray-800 mb-4 text-center">Signup</h1>
       <div class="flex flex-col">
         <label for="username" class="font-medium">Username</label>
         <input
           type="text"
           name="username"
           id="username"
+          class="border-1 rounded-md px-2 py-1"
+        />
+      </div>
+      <div class="flex flex-col">
+        <label for="email" class="font-medium">Email</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
           class="border-1 rounded-md px-2 py-1"
         />
       </div>
@@ -31,16 +40,23 @@
           class="border-1 rounded-md px-2 py-1"
         />
       </div>
+      <div class="flex flex-col">
+        <label for="confirm-password" class="font-medium"
+          >Confirm Password</label
+        >
+        <input
+          type="password"
+          name="confirm-password"
+          id="confirm-password"
+          class="border-1 rounded-md px-2 py-1"
+        />
+      </div>
       <button
         type="submit"
         class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md transition-colors hover:cursor-pointer mt-2"
       >
-        Login
+        Signup
       </button>
-      <p class="font-medium">
-        Don't have an account?
-        <a href="/signup" class="underline font-bold">Sign-up</a>!
-      </p>
     </form>
   </body>
 </html>
