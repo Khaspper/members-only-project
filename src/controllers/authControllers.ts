@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 // import { body, validationResult, ValidationChain } from "express-validator";
-import { body, check, validationResult } from "express-validator";
+import { body, validationResult } from "express-validator";
 import { getUserByUsername, getUserByEmail } from "../db/queries";
 
 //TODO: Check if the given USER doesn't already exist
@@ -40,11 +40,19 @@ const validateSignup = [
     }),
   body("password")
     .trim()
+    .notEmpty()
     .withMessage(`Password ${emptyError}`)
     .matches(/^\S*$/)
     .withMessage("Passwords cannot contain spaces.")
     .isLength({ min: 8 })
     .withMessage("Password be at least 8 characters long."),
+  body("confirmPassword").custom((value, { req }) => {
+    if (value !== req.body.password) {
+      console.log("Passwords do not match");
+      throw new Error("Passwords do not match.");
+    }
+    return true;
+  }),
 ];
 
 export const postNewUser = [
@@ -52,6 +60,7 @@ export const postNewUser = [
   async (req: Request, res: Response) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      console.log(errors);
       return res.sendStatus(400);
     }
     res.sendStatus(201);
