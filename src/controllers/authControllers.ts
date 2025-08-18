@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 // import { body, validationResult, ValidationChain } from "express-validator";
-import { body, validationResult } from "express-validator";
+import { body, query, validationResult } from "express-validator";
 import { getUserByUsername, getUserByEmail, addNewUser } from "../db/queries";
 
 //TODO: Check if the given USER doesn't already exist
@@ -55,16 +55,47 @@ const validateSignup = [
   }),
 ];
 
+const validateSecretCode = [
+  query("secretCode")
+    .trim()
+    .notEmpty()
+    .withMessage("The secret is not empty :3")
+    .custom((value, { req }) => {
+      if (value !== process.env.SECRET_CODE) {
+        throw new Error("You got the secret WRONG!!!! :33333 LOL");
+      }
+      return true;
+    }),
+];
+
 export const postNewUser = [
   validateSignup,
   async (req: Request, res: Response) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      // TODO: Rerender the same page but with the errors
+      console.log("PostNewUser");
       console.log(errors);
       return res.sendStatus(400);
     }
     await addNewUser(req.body);
     res.sendStatus(201);
     // res.sendStatus(400) // Means the req was bad
+  },
+];
+
+export const isMember = [
+  validateSecretCode,
+  async (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      // TODO: Rerender the same page but with the errors
+      console.log("isMember");
+      console.log(errors);
+      return res.sendStatus(400);
+    }
+    // Uncomment this when you get sessions implemented
+    // await updateUsersMembership(req.user);
+    res.render("members");
   },
 ];

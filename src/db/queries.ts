@@ -32,3 +32,7 @@ export async function addNewUser(user: TUser) {
     [username, hash, email]
   );
 }
+
+export async function updateUsersMembership(id: number) {
+  await pool.query("UPDATE users SET isAdmin = true WHERE id = ($1)", [id]);
+}
