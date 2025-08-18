@@ -1,6 +1,6 @@
 node_modules/
 dist/
 *.tsbuildinfo
-/public/styles/build.css
+src/public/styles/build.css
 .env
 .vscode
