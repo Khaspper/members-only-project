@@ -7,20 +7,26 @@ type TUser = {
   password: string;
 };
 
+export async function getUserById(id: number) {
+  const { rows } = await pool.query("SELECT * FROM users WHERE id = ($1)", [
+    id,
+  ]);
+  return rows[0];
+}
+
 export async function getUserByUsername(username: string) {
   const { rows } = await pool.query(
-    "SELECT username FROM users WHERE username = ($1)",
+    "SELECT * FROM users WHERE username LIKE ($1)",
     [username]
   );
-  return rows;
+  return rows[0];
 }
 
 export async function getUserByEmail(email: string) {
-  const { rows } = await pool.query(
-    "SELECT email FROM users WHERE email = ($1)",
-    [email]
-  );
-  return rows;
+  const { rows } = await pool.query("SELECT * FROM users WHERE email = ($1)", [
+    email,
+  ]);
+  return rows[0];
 }
 
 export async function addNewUser(user: TUser) {

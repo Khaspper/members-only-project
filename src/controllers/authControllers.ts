@@ -1,5 +1,4 @@
 import type { Request, Response } from "express";
-// import { body, validationResult, ValidationChain } from "express-validator";
 import { body, query, validationResult } from "express-validator";
 import { getUserByUsername, getUserByEmail, addNewUser } from "../db/queries";
 
@@ -20,7 +19,7 @@ const validateSignup = [
     .withMessage(`Username must be between 1 and 55 characters.`)
     .custom(async (username) => {
       const user = await getUserByUsername(username);
-      if (user.length > 0) {
+      if (user) {
         console.log("User already exists");
         throw new Error("User already exists");
       }
@@ -33,7 +32,7 @@ const validateSignup = [
     .withMessage("Fill email form in this format 'abc@xyz.com'")
     .custom(async (email) => {
       const user = await getUserByEmail(email);
-      if (user.length > 0) {
+      if (user) {
         console.log("Email already exists");
         throw new Error("Email already exists");
       }
@@ -79,7 +78,7 @@ export const postNewUser = [
       return res.sendStatus(400);
     }
     await addNewUser(req.body);
-    res.sendStatus(201);
+    res.redirect("/login");
     // res.sendStatus(400) // Means the req was bad
   },
 ];

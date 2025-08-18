@@ -2,6 +2,10 @@ import express from "express";
 import dotenv from "dotenv";
 import path from "node:path";
 import authRouter from "./routes/authRouter";
+import session from "express-session";
+import connectPgSimple from "connect-pg-simple";
+import pool from "./db/pool";
+import passport from "passport";
 
 const app = express();
 const PORT = 3000;
@@ -12,6 +16,22 @@ app.set("view engine", "ejs");
 dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(
+  session({
+    store: new (connectPgSimple(session))({
+      pool: pool,
+      tableName: "session",
+    }),
+    secret: String(process.env.SECRET_CODE),
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24, // Equals 1 day (1 second * 60 = 1 minute * 60 = 1 hour * 24 = 1 day)
+    },
+  })
+);
+app.use(passport.session());
 
 //! REMEMBER THIS IS THE LOGIN ROUTE!!!! THERE IS NO /login
 app.use("/", authRouter);
