@@ -11,6 +11,6 @@ authRouter.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-authRouter.post("/", postNewUser);
+authRouter.post("/", ...postNewUser);
 
 export default authRouter;
