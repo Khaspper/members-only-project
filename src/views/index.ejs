@@ -9,8 +9,10 @@
   <body
     class="h-screen flex flex-col text-white bg-emerald-900 justify-start items-center"
   >
-    <div class="justify-center">
-      <h1 class="text-3xl">Messages</h1>
+    <div class="flex flex-col">
+      <div class="text-center mt-3">
+        <p class="text-3xl">Messages</p>
+      </div>
       <section class="">
         <% messages.forEach((message) => { %> <%-
         include('partials/message.ejs', { message: message }) %> <% }); %>

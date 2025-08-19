@@ -122,8 +122,11 @@ export function renderLoginPage(req: Request, res: Response) {
 
 export async function getHomePage(req: Request, res: Response) {
   const messages = await getAllMessagesWithUsers();
-  console.log(messages);
-  res.render("index", { messages: messages });
+  const userIsAuthenticated = req.isAuthenticated();
+  res.render("index", {
+    messages: messages,
+    userIsAuthenticated: userIsAuthenticated,
+  });
 }
 
 export function redirectAuthorizedUser(req: Request, res: Response) {
