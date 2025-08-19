@@ -1,11 +1,12 @@
 import express from "express";
 import dotenv from "dotenv";
 import path from "node:path";
-import authRouter from "./routes/authRouter";
+import publicRouter from "./routes/publicRouter";
 import session from "express-session";
 import connectPgSimple from "connect-pg-simple";
 import pool from "./db/pool";
 import passport from "passport";
+import authRouter from "./routes/authRouter";
 
 const app = express();
 const PORT = 3000;
@@ -33,9 +34,8 @@ app.use(
 );
 app.use(passport.session());
 
-//! REMEMBER THIS IS THE LOGIN ROUTE!!!! THERE IS NO /login
-app.use("/", authRouter);
-//! REMEMBER THIS IS THE LOGIN ROUTE!!!! THERE IS NO /login
+app.use("/", publicRouter);
+app.use("/:id", authRouter);
 
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);
