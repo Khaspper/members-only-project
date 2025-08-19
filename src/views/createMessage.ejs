@@ -6,18 +6,18 @@
     <link rel="stylesheet" href="/styles/build.css" />
     <title>Create Message</title>
   </head>
-  <body class="h-screen flex justify-center text-white bg-gray-700">
+  <body class="h-screen flex justify-center text-white">
     <form
       id="myForm"
       method="POST"
       action="/new"
-      class="bg-gray-300 h-fit w-[400px] min-w-fit mt-20 rounded-tr-xl rounded-tl-xl text-black rounded-lg shadow-lg flex flex-col"
+      class="bg-gray-700 h-fit w-[400px] min-w-fit mt-20 rounded-tr-xl rounded-tl-xl text-white rounded-lg shadow-lg flex flex-col"
     >
       <div
         class="flex justify-center items-center p-5 border-b-1 border-zinc-600"
       >
         <header>
-          <p class="text-2xl text-black font-bold">New message</p>
+          <p class="text-2xl font-bold">New message</p>
         </header>
       </div>
       <div class="p-5 flex flex-col">
@@ -37,9 +37,9 @@
               type="text"
               id="date"
               name="date"
-              placeholder="Enter your name here..."
+              value="<%= date %> <%= time %>"
               readonly
-              class="border-none outline-none focus:ring-0"
+              class="border-none outline-none focus:ring-0 text-sm"
             />
           </label>
         </div>

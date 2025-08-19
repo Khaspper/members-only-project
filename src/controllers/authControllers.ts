@@ -22,8 +22,8 @@ export function renderCreateMessageForm(req: Request, res: Response) {
   });
 
   // Example for rendering:
-  // res.render("createMessage", { date, time });
+  res.render("createMessage", { date, time });
 
   // If you just want JSON:
-  res.json({ date, time, now });
+  // res.json({ date, time });
 }
