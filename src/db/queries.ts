@@ -58,3 +58,10 @@ export async function addNewMessage(
     console.log(error);
   }
 }
+
+export async function getAllMessagesWithUsers() {
+  const { rows } = await pool.query(
+    "SELECT title, message, message_date, username  FROM messages LEFT JOIN users ON messages.users_id = users.id;"
+  );
+  return rows;
+}

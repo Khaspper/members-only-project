@@ -7,13 +7,14 @@ import {
   redirectAuthorizedUser,
   renderLoginPage,
   logUserOut,
+  getHomePage,
 } from "../controllers/publicControllers";
 import passport from "../config/passport";
 import "../config/passport";
 
 const publicRouter = Router();
 
-publicRouter.get("/", renderLoginPage);
+publicRouter.get("/", getHomePage);
 
 publicRouter.post("/logout", logUserOut);
 publicRouter.get("/login", renderLoginPage);

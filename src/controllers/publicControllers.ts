@@ -1,6 +1,12 @@
 import type { Request, Response } from "express";
 import { body, query, validationResult } from "express-validator";
-import { getUserByUsername, getUserByEmail, addNewUser } from "../db/queries";
+import {
+  getUserByUsername,
+  getUserByEmail,
+  addNewUser,
+  getAllMessagesWithUsers,
+  updateUsersMembership,
+} from "../db/queries";
 
 //TODO: Check if the given USER doesn't already exist
 //TODO: Check if the given EMAIL doesn't already exist
@@ -94,7 +100,7 @@ export const isMember = [
       return res.sendStatus(400);
     }
     // Uncomment this when you get sessions implemented
-    // await updateUsersMembership(req.user);
+    await updateUsersMembership(Number(req.user?.id));
     res.render("members");
   },
 ];
@@ -114,8 +120,10 @@ export function renderLoginPage(req: Request, res: Response) {
   res.render("login");
 }
 
-export function getHomePage(req: Request, res: Response) {
-  res.render("index");
+export async function getHomePage(req: Request, res: Response) {
+  const messages = await getAllMessagesWithUsers();
+  console.log(messages);
+  res.render("index", { messages: messages });
 }
 
 export function redirectAuthorizedUser(req: Request, res: Response) {
