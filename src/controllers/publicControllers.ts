@@ -108,6 +108,9 @@ export function renderSignupPage(req: Request, res: Response) {
 }
 
 export function renderLoginPage(req: Request, res: Response) {
+  if (req.isAuthenticated()) {
+    return res.redirect(`/${req.user.id}`);
+  }
   res.render("login");
 }
 
