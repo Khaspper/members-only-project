@@ -22,11 +22,9 @@ export function getMessageForm(req: Request, res: Response) {
     minute: "2-digit",
   });
 
-  // Example for rendering:
   res.render("createMessage", { date, time, username });
-
-  // If you just want JSON:
-  // res.json({ date, time });
 }
 
-export function postMessage(req: Request, res: Response) {}
+export function postMessage(req: Request, res: Response) {
+  res.sendStatus(201);
+}

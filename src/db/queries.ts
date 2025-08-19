@@ -44,9 +44,13 @@ export async function updateUsersMembership(id: number) {
 }
 
 export async function addNewMessage(
+  title: string,
   username: string,
   date: string,
-  message: string
+  message: string,
+  userID: number
 ) {
-  // await pool.query("UPDATE users SET isAdmin = true WHERE id = ($1)", [id]);
+  await pool.query(
+    "INSERT INTO message (users_id, title, message, message_date) VALUES ($1, $2, $3, $4, $5)"
+  );
 }
