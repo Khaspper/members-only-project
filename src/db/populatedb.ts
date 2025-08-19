@@ -55,7 +55,7 @@ async function main() {
   users_id INTEGER,
   title VARCHAR ( 55 ) NOT NULL,
   message VARCHAR ( 300 ) NOT NULL,
-  message_date TIMESTAMPTZ NOT NULL
+  message_date VARCHAR(30) NOT NULL
   );
   `);
 

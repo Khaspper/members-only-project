@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/build.css" />
+    <title>Create Message</title>
+  </head>
+  <body class="h-screen flex justify-center text-white bg-gray-700">
+    <form
+      id="myForm"
+      method="POST"
+      action="/new"
+      class="bg-gray-300 h-fit w-[400px] min-w-fit mt-20 rounded-tr-xl rounded-tl-xl text-black rounded-lg shadow-lg flex flex-col"
+    >
+      <div
+        class="flex justify-center items-center p-5 border-b-1 border-zinc-600"
+      >
+        <header>
+          <p class="text-2xl text-black font-bold">New message</p>
+        </header>
+      </div>
+      <div class="p-5 flex flex-col">
+        <div class="flex border-zinc-600 flex-col gap-2">
+          <label for="username">
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Enter your name here..."
+              required
+              class="border-none outline-none focus:ring-0"
+            />
+          </label>
+          <label for="date">
+            <input
+              type="text"
+              id="date"
+              name="date"
+              placeholder="Enter your name here..."
+              readonly
+              class="border-none outline-none focus:ring-0"
+            />
+          </label>
+        </div>
+        <label for="message">
+          <textarea
+            id="message"
+            name="message"
+            rows="8"
+            cols="40"
+            placeholder="Enter your comments here..."
+            maxlength="200"
+            required
+            class="resize-none outline-none focus:ring-0 border-1 container mt-5 border-zinc-600 rounded-lg p-5"
+          ></textarea>
+        </label>
+        <div class="flex justify-between">
+          <a
+            href="/"
+            class="justify-center items-center self-end p-4 mt-5 bg-emerald-500 rounded-full text-sm hover:cursor-pointer hover:bg-emerald-600 text-white"
+          >
+            Go back
+          </a>
+          <button
+            type="submit"
+            class="justify-center items-center self-end p-4 mt-5 bg-emerald-500 rounded-full text-sm hover:cursor-pointer hover:bg-emerald-600 text-white"
+          >
+            Send message
+          </button>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>

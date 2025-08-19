@@ -109,14 +109,16 @@ export function renderSignupPage(req: Request, res: Response) {
 
 export function renderLoginPage(req: Request, res: Response) {
   if (req.isAuthenticated()) {
-    return res.redirect(`/${req.user.id}`);
+    return res.redirect(`/${req.user.id}/create-message`);
   }
   res.render("login");
 }
 
 export function redirectAuthorizedUser(req: Request, res: Response) {
   try {
-    res.redirect(`/${req.user?.id}`);
+    //! Change this line
+    res.redirect(`/${req.user?.id}/create-message`);
+    //! Change this line
   } catch (error) {
     console.log("Cannot log in");
     console.log(error);
