@@ -6,11 +6,10 @@
     <link rel="stylesheet" href="/styles/build.css" />
     <title>Create Message</title>
   </head>
-  <body class="h-screen flex justify-center text-white">
+  <body class="h-screen flex justify-center text-white bg-emerald-900">
     <form
-      id="myForm"
+      action="/homepage"
       method="POST"
-      action="/new"
       class="bg-gray-700 h-fit w-[400px] min-w-fit mt-20 rounded-tr-xl rounded-tl-xl text-white rounded-lg shadow-lg flex flex-col"
     >
       <div
@@ -22,14 +21,15 @@
       </div>
       <div class="p-5 flex flex-col">
         <div class="flex border-zinc-600 flex-col gap-2">
-          <label for="username">
+          <label for="username" class="cursor-text">
+            <%= username %>
             <input
               type="text"
               id="username"
               name="username"
-              placeholder="Enter your name here..."
-              required
-              class="border-none outline-none focus:ring-0"
+              value="<%= username %>"
+              readonly
+              class="border-none outline-none focus:ring-0 hidden"
             />
           </label>
           <label for="date">
@@ -39,7 +39,7 @@
               name="date"
               value="<%= date %> <%= time %>"
               readonly
-              class="border-none outline-none focus:ring-0 text-sm"
+              class="border-none outline-none focus:ring-0 text-sm text-gray-400"
             />
           </label>
         </div>
@@ -57,14 +57,14 @@
         </label>
         <div class="flex justify-between">
           <a
-            href="/"
-            class="justify-center items-center self-end p-4 mt-5 bg-emerald-500 rounded-full text-sm hover:cursor-pointer hover:bg-emerald-600 text-white"
+            href="/homepage"
+            class="justify-center items-center self-end p-4 mt-5 bg-emerald-900 rounded-full text-sm hover:cursor-pointer hover:bg-emerald-950 text-white"
           >
             Go back
           </a>
           <button
             type="submit"
-            class="justify-center items-center self-end p-4 mt-5 bg-emerald-500 rounded-full text-sm hover:cursor-pointer hover:bg-emerald-600 text-white"
+            class="justify-center items-center self-end p-4 mt-5 bg-emerald-900 rounded-full text-sm hover:cursor-pointer hover:bg-emerald-950 text-white"
           >
             Send message
           </button>

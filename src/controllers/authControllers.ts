@@ -7,8 +7,9 @@ export function isAuthenticated(req: Request, res: Response, next: Function) {
   res.redirect("/login");
 }
 
-export function renderCreateMessageForm(req: Request, res: Response) {
+export function getMessageForm(req: Request, res: Response) {
   const now = new Date();
+  const username = req.user?.username;
 
   const date = now.toLocaleDateString(undefined, {
     year: "numeric",
@@ -22,8 +23,10 @@ export function renderCreateMessageForm(req: Request, res: Response) {
   });
 
   // Example for rendering:
-  res.render("createMessage", { date, time });
+  res.render("createMessage", { date, time, username });
 
   // If you just want JSON:
   // res.json({ date, time });
 }
+
+export function postMessage(req: Request, res: Response) {}
