@@ -1,4 +1,5 @@
 import type { Request, Response } from "express";
+import { addNewMessage } from "../db/queries";
 
 export function isAuthenticated(req: Request, res: Response, next: Function) {
   if (req.isAuthenticated()) {
@@ -25,6 +26,18 @@ export function getMessageForm(req: Request, res: Response) {
   res.render("createMessage", { date, time, username });
 }
 
-export function postMessage(req: Request, res: Response) {
-  res.sendStatus(201);
+export function postMessage(req: Request, res: Response, next: Function) {
+  try {
+    console.log(req.body);
+    res.sendStatus(201);
+    addNewMessage(
+      Number(req.user?.id),
+      req.body.title,
+      req.body.message,
+      req.body.date
+    );
+  } catch (error) {
+    res.sendStatus(401);
+    next(error);
+  }
 }

@@ -8,6 +8,6 @@ import {
 const authRouter = Router();
 
 authRouter.get("/create-message", isAuthenticated, getMessageForm);
-authRouter.post("/homepage", isAuthenticated, postMessage);
+authRouter.post("/create-message", isAuthenticated, postMessage);
 
 export default authRouter;

@@ -44,13 +44,17 @@ export async function updateUsersMembership(id: number) {
 }
 
 export async function addNewMessage(
+  userID: number,
   title: string,
-  username: string,
-  date: string,
   message: string,
-  userID: number
+  date: string
 ) {
-  await pool.query(
-    "INSERT INTO message (users_id, title, message, message_date) VALUES ($1, $2, $3, $4, $5)"
-  );
+  try {
+    await pool.query(
+      "INSERT INTO messages (users_id, title, message, message_date) VALUES ($1, $2, $3, $4)",
+      [userID, title, message, date]
+    );
+  } catch (error) {
+    console.log(error);
+  }
 }
