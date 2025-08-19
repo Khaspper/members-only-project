@@ -6,6 +6,7 @@ import {
   addNewUser,
   getAllMessagesWithUsers,
   updateUsersMembership,
+  deleteMessage,
 } from "../db/queries";
 
 //TODO: Check if the given USER doesn't already exist
@@ -95,9 +96,7 @@ export const isMember = [
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       // TODO: Rerender the same page but with the errors
-      console.log("isMember");
-      console.log(errors);
-      return res.sendStatus(400);
+      return res.render("join", { errors: errors });
     }
     // Uncomment this when you get sessions implemented
     await updateUsersMembership(Number(req.user?.id));
@@ -126,6 +125,7 @@ export async function getHomePage(req: Request, res: Response) {
   res.render("index", {
     messages: messages,
     userIsAuthenticated: userIsAuthenticated,
+    userIsAdmin: req.user?.isadmin ? true : false,
   });
 }
 
@@ -141,9 +141,15 @@ export function redirectAuthorizedUser(req: Request, res: Response) {
 }
 
 export function logUserOut(req: Request, res: Response) {
-  if (!req.user) return res.sendStatus(401);
+  if (!req.user) return res.redirect("/login");
   req.logOut((err) => {
     if (err) return res.sendStatus(400);
-    res.sendStatus(200);
+    res.redirect("/");
   });
+}
+
+export async function postDeleteMessage(req: Request, res: Response) {
+  console.log(req.body);
+  await deleteMessage(req.body.id);
+  res.redirect("/");
 }

@@ -8,6 +8,7 @@ import {
   renderLoginPage,
   logUserOut,
   getHomePage,
+  postDeleteMessage,
 } from "../controllers/publicControllers";
 import passport from "../config/passport";
 import "../config/passport";
@@ -15,6 +16,7 @@ import "../config/passport";
 const publicRouter = Router();
 
 publicRouter.get("/", getHomePage);
+publicRouter.post("/", postDeleteMessage);
 
 publicRouter.post("/logout", logUserOut);
 publicRouter.get("/login", renderLoginPage);

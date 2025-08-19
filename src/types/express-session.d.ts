@@ -12,6 +12,7 @@ declare global {
       id: number;
       username: string;
       hash: string;
+      isadmin: boolean;
     }
   }
 }

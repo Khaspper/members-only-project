@@ -29,7 +29,6 @@ export function getMessageForm(req: Request, res: Response) {
 
 export async function postMessage(req: Request, res: Response, next: Function) {
   try {
-    console.log(req.body);
     await addNewMessage(
       Number(req.user?.id),
       req.body.title,

@@ -258,6 +258,9 @@
   .min-w-fit {
     min-width: fit-content;
   }
+  .cursor-pointer {
+    cursor: pointer;
+  }
   .cursor-text {
     cursor: text;
   }

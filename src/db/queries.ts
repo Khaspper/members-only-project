@@ -61,7 +61,11 @@ export async function addNewMessage(
 
 export async function getAllMessagesWithUsers() {
   const { rows } = await pool.query(
-    "SELECT title, message, message_date, username  FROM messages LEFT JOIN users ON messages.users_id = users.id;"
+    "SELECT messages.id, title, message, message_date, username  FROM messages LEFT JOIN users ON messages.users_id = users.id;"
   );
   return rows;
+}
+
+export async function deleteMessage(id: number) {
+  await pool.query("DELETE FROM messages WHERE id = ($1)", [id]);
 }

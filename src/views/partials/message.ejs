@@ -15,4 +15,9 @@
     <p>SECRET :33333 YOU'RE NOT ALLOWED TO SEE IT TEE HEE HEE</p>
     <% } %>
   </div>
+    <% if (userIsAdmin) { %>
+      <form action="/" method="POST">
+        <input type="text" name="id" id="id" value='<%= message.id %>' readonly hidden>
+        <button type="submit">Delete Message</button></form>
+    <% } %>
 </section>
