@@ -11,6 +11,7 @@ export function isAuthenticated(req: Request, res: Response, next: Function) {
 export function getMessageForm(req: Request, res: Response) {
   const now = new Date();
   const username = req.user?.username;
+  const userID = req.user?.id;
 
   const date = now.toLocaleDateString(undefined, {
     year: "numeric",
@@ -23,7 +24,7 @@ export function getMessageForm(req: Request, res: Response) {
     minute: "2-digit",
   });
 
-  res.render("createMessage", { date, time, username });
+  res.render("createMessage", { date, time, username, userID });
 }
 
 export function postMessage(req: Request, res: Response, next: Function) {
