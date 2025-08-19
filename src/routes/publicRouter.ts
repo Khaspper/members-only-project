@@ -13,6 +13,8 @@ import "../config/passport";
 
 const publicRouter = Router();
 
+publicRouter.get("/", renderLoginPage);
+
 publicRouter.post("/logout", logUserOut);
 publicRouter.get("/login", renderLoginPage);
 publicRouter.post(

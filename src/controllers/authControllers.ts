@@ -27,16 +27,16 @@ export function getMessageForm(req: Request, res: Response) {
   res.render("createMessage", { date, time, username, userID });
 }
 
-export function postMessage(req: Request, res: Response, next: Function) {
+export async function postMessage(req: Request, res: Response, next: Function) {
   try {
     console.log(req.body);
-    res.sendStatus(201);
-    addNewMessage(
+    await addNewMessage(
       Number(req.user?.id),
       req.body.title,
       req.body.message,
       req.body.date
     );
+    res.sendStatus(201).redirect("/");
   } catch (error) {
     res.sendStatus(401);
     next(error);

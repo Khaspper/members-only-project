@@ -114,6 +114,10 @@ export function renderLoginPage(req: Request, res: Response) {
   res.render("login");
 }
 
+export function getHomePage(req: Request, res: Response) {
+  res.render("index");
+}
+
 export function redirectAuthorizedUser(req: Request, res: Response) {
   try {
     //! Change this line
